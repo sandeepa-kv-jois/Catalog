@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: ce-nextgen
+  description: The official CE NEXTGEN service REST APIs
+spec:
+  type: openapi
+  lifecycle: production
+  owner: INVALID
+  definition:
+    $text: https://app.harness.io/prod1/ccm/api/openapi.json
