@@ -7,5 +7,4 @@ spec:
   type: openapi
   lifecycle: production
   owner: INVALID
-  definition:
-    $text: https://github.com
+  
