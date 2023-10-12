@@ -1,0 +1,87 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  description: Flask API to enable various operations for Confluent Kafka
+  links:
+  - title: Non-Prod Robin
+    url: https://confluent-manager.mno-automation-np.aws.dishcloud.io/
+  - title: Prod Robin
+    url: https://robin.wireless-mno-automation-p.aws.dishcloud.io/
+  name: robin-backend
+  tags:
+  - python
+  - flask
+  - k8s
+spec:
+  definition: "info:\n  description: Confluent Operations API\n  title: Robin Backend\
+    \ API\n  version: 1.0.0\npaths:\n  /api/time:\n    get:\n      responses:\n  \
+    \      '200':\n          content:\n            application/json:\n           \
+    \   schema:\n                type: object\n                properties:\n     \
+    \             time:\n                    type: float\n          description: current\
+    \ time in seconds since epoch.\n  /api/ready:\n    get:\n      responses:\n  \
+    \      '200':\n          description: Ready\n        '500':\n          description:\
+    \ Not ready\n  /api/health:\n    get:\n      responses:\n        '200':\n    \
+    \      description: Healthy\n        '500':\n          description: Unhealthy\n\
+    \  /api/topic:\n    post:\n      requestBody:\n        content:\n          application/json:\n\
+    \            schema:\n              type: object\n              properties:\n\
+    \                topic_name:\n                  type: string\n               \
+    \ consumers:\n                  type: array\n                  items:\n      \
+    \              type: string\n                producers:\n                  type:\
+    \ string\n                control_tower:\n                  type: string\n   \
+    \             partitions:\n                  type: string\n                retention:\n\
+    \                  type: string\n                update:\n                  type:\
+    \ string\n                cluster_env:\n                  type: string\n     \
+    \           region:\n                  type: string\n      responses:\n      \
+    \  '200':\n          description: Topic created\n        '500':\n          description:\
+    \ Topic creation failed\n  /api/validate-topic:\n    post:\n      requestBody:\n\
+    \        content:\n          application/json:\n            schema:\n        \
+    \      $ref: '#/components/schemas/None'\n            type: object\n         \
+    \   properties:\n              topic_name: null\n              type: string\n\
+    \              control_tower: null\n              region: null\n             \
+    \ cluster_env: null\n  /api/pipeline-listener:\n    post:\n      requestBody:\n\
+    \        content:\n          application/json:\n            schema:\n        \
+    \      $ref: '#/components/schemas/None'\n            type: object\n         \
+    \   properties:\n              project_id: null\n              type: string\n\
+    \              pipeline_id: null\n        responses:\n          200: null\n  \
+    \        description: Pipeline failed\n          500: null\n  /api/merge-listener:\n\
+    \    post:\n      requestBody:\n        content:\n          application/json:\n\
+    \            schema:\n              $ref: '#/components/schemas/None'\n      \
+    \      type: object\n            properties:\n              project_id: null\n\
+    \              type: string\n              source_branch: null\n        responses:\n\
+    \          200: null\n          description: Merge request failed\n          500:\
+    \ null\n  /api/new-service-account:\n    post:\n      requestBody:\n        content:\n\
+    \          application/json:\n            schema:\n              $ref: '#/components/schemas/None'\n\
+    \            type: object\n            properties:\n              account_name:\
+    \ null\n              type: object\n              service_account_id: null\n \
+    \             keys: null\n  /api/create-service:\n    post:\n      requestBody:\n\
+    \        content:\n          application/json:\n            schema:\n        \
+    \      $ref: '#/components/schemas/None'\n            type: object\n         \
+    \   properties:\n              account_name: null\n              type: string\n\
+    \              email: null\n              description: null\n  /api/get-topics:\n\
+    \    post:\n      requestBody:\n        content:\n          application/json:\n\
+    \            schema:\n              $ref: '#/components/schemas/None'\n      \
+    \      type: object\n            properties:\n              env: null\n      \
+    \        type: boolean\n              region: null\n              sub_env: null\n\
+    \              create: null\n  /api/get-services:\n    get:\n      responses:\n\
+    \        '200':\n          description: Service accounts found\n        '500':\n\
+    \          description: Service accounts not found\n  /api/get-acl:\n    post:\n\
+    \      requestBody:\n        content:\n          application/json:\n         \
+    \   schema:\n              $ref: '#/components/schemas/None'\n            type:\
+    \ object\n            properties:\n              topic: null\n              type:\
+    \ string\n              env: null\n              sub_env: null\n  /api/get-acl-service-details:\n\
+    \    post:\n      requestBody:\n        content:\n          application/json:\n\
+    \            schema:\n              $ref: '#/components/schemas/None'\n      \
+    \      type: object\n            properties:\n              service_account_identifier:\
+    \ null\n              type: string\n              env: null\n              sub_env:\
+    \ null\n  /api/feedback:\n    post:\n      requestBody:\n        content:\n  \
+    \        application/json:\n            schema:\n              $ref: '#/components/schemas/None'\n\
+    \            type: object\n            properties:\n              feedback: null\n\
+    \              type: string\n  /api/lookup-ccloud-id:\n    post:\n      requestBody:\n\
+    \        content:\n          application/json:\n            schema:\n        \
+    \      $ref: '#/components/schemas/None'\n            type: object\n         \
+    \   properties:\n              account_name: null\n              type: string\n\
+    openapi: 3.1.2\n"
+  lifecycle: production
+  owner: DevOps Owner User Group
+  system: DevOps
+  type: openapi
