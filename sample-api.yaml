@@ -7,4 +7,10 @@ spec:
   type: openapi
   lifecycle: production
   owner: INVALID
+  definition: |
+    openapi: 3.0.3
+    x-stoplight:
+      id: q0pbqzd9uictu
+    info:
+      title: Harness NextGen Software Delivery Platform API Reference
   
