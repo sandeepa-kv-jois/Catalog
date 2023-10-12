@@ -6,7 +6,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: INVALID
+  owner: INVALID group
   definition: |
     openapi: 3.0.3
     x-stoplight:
