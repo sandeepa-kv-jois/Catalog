@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: my-template
+  name: my-template-new
   description: A template that utilizes query string parameters
 spec:
   owner: team@example.com
