@@ -1,0 +1,38 @@
+apiVersion: backstage.io/v1alpha1
+kind: Template
+metadata:
+  name: my-template
+  description: A template that utilizes query string parameters
+spec:
+  owner: team@example.com
+  type: service
+
+  # Define the inputs for the template
+  parameters:
+    - title: 'Component Name'
+      name: 'componentName'
+      description: 'The name of the component'
+      type: string
+      default: '{{ query.componentName }}'
+      required: true
+
+    - title: 'Description'
+      name: 'description'
+      description: 'A brief description of the component'
+      type: string
+      default: '{{ query.description }}'
+      required: false
+
+  steps:
+    - id: 'fetch'
+      name: 'Fetch Template'
+      action: 'fetch:github'
+      input:
+        url: 'https://github.com/your-org/your-repo/blob/main/templates/template.yaml'
+
+    - id: 'generate'
+      name: 'Generate Component'
+      action: 'my-custom-action'
+      input:
+        componentName: '{{ parameters.componentName }}'
+        description: '{{ parameters.description }}'
