@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Template
 metadata:
-  name: my-template
+  name: my-template-2
   description: A template that utilizes query string parameters
 spec:
   owner: team@example.com
