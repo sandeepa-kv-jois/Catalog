@@ -16,23 +16,9 @@ spec:
       default: '{{ query.componentName }}'
       required: true
 
-    - title: 'Description'
-      name: 'description'
-      description: 'A brief description of the component'
-      type: string
-      default: '{{ query.description }}'
-      required: false
-
   steps:
-    - id: 'fetch'
-      name: 'Fetch Template'
-      action: 'fetch:github'
+    - id: log-message
+      name: Log Message
+      action: debug:log
       input:
-        url: 'https://github.com/your-org/your-repo/blob/main/templates/template.yaml'
-
-    - id: 'generate'
-      name: 'Generate Component'
-      action: 'my-custom-action'
-      input:
-        componentName: '{{ parameters.componentName }}'
-        description: '{{ parameters.description }}'
+        message: 'Hello, ${{ parameters.componentName }}!'
