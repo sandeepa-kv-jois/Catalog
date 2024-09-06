@@ -1,27 +1,38 @@
----
-apiVersion: scaffolder.backstage.io/v1beta3
+apiVersion: backstage.io/v1alpha1
 kind: Template
 metadata:
-  name: query-params-template
-  title: Query param values template
-  description: A software template to test filling the values via URL query params into a readonly field
+  name: my-template
+  description: A template that utilizes query string parameters
 spec:
-  owner: devops
-  type: catalog
+  owner: team@example.com
+  type: service
 
+  # Define the inputs for the template
   parameters:
-    - title: Repository details
-      required:
-        - title
-      properties:
-        title: # Name of this property matches the query params used
-          title: Title
-          ui:readonly: true # marking this field readonly, so it can't be modified via the UI
-          type: string
-          description: Unique title of the next chapter in the recipe book
+    - title: 'Component Name'
+      name: 'componentName'
+      description: 'The name of the component'
+      type: string
+      default: '{{ query.componentName }}'
+      required: true
+
+    - title: 'Description'
+      name: 'description'
+      description: 'A brief description of the component'
+      type: string
+      default: '{{ query.description }}'
+      required: false
+
   steps:
-    - id: log-message
-      name: Log Message
-      action: debug:log
+    - id: 'fetch'
+      name: 'Fetch Template'
+      action: 'fetch:github'
       input:
-        message: 'Hello, ${{ parameters.title }}!'
+        url: 'https://github.com/your-org/your-repo/blob/main/templates/template.yaml'
+
+    - id: 'generate'
+      name: 'Generate Component'
+      action: 'my-custom-action'
+      input:
+        componentName: '{{ parameters.componentName }}'
+        description: '{{ parameters.description }}'
