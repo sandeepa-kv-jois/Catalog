@@ -15,7 +15,7 @@ spec:
         - title
       properties:
         title: # Name of this property matches the query params used
-          title: Title
+          title: '{{ query.title }}'
           ui:readonly: true # marking this field readonly, so it can't be modified via the UI
           type: string
           description: Unique title of the next chapter in the recipe book
